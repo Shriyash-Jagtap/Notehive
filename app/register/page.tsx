@@ -1,10 +1,16 @@
+// ./app/pages/Register.tsx (Assuming this is the correct path)
+
 "use client";
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { signIn } from 'next-auth/react'
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Register() {
+  const handleGoogleSignIn = () => {
+    // Redirect to the Vercel auth server's Google sign-in endpoint
+    window.location.href = "https://notehive-auth-server.vercel.app/api/auth/signin/google?callbackUrl=https://your-cloudflare-frontend.com/callback";
+  };
+
   return (
     <div className="min-h-screen bg-[#1c1c1c] text-white relative overflow-hidden">
       {/* Background grid */}
@@ -37,9 +43,9 @@ export default function Register() {
 
           {/* Continue with Google Button */}
           <button
-          onClick={() => signIn('google')}
-          className="bg-[#1c1c1c] text-white px-5 py-2 rounded-lg border border-gray-600 shadow-md hover:bg-[#2c2c2c] transition duration-300 ease-in-out mb-8 flex items-center space-x-2"
-        >
+            onClick={handleGoogleSignIn}
+            className="bg-[#1c1c1c] text-white px-5 py-2 rounded-lg border border-gray-600 shadow-md hover:bg-[#2c2c2c] transition duration-300 ease-in-out mb-8 flex items-center space-x-2"
+          >
             {/* Google Icon SVG */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
