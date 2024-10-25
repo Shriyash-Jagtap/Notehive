@@ -1,4 +1,4 @@
-// ./app/pages/api/store-token.ts
+// app/api/store-token.ts
 
 import { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';

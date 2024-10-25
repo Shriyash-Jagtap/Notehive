@@ -1,4 +1,4 @@
-// ./app/pages/protected.tsx
+// app/pages/protected.tsx
 
 import { GetServerSideProps } from 'next';
 import cookie from 'cookie';
@@ -36,9 +36,30 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  // Optionally, verify the token's validity here
+  // Optionally, verify the token's validity here by communicating with the auth server
+  // For example, send the token to the auth server's verification endpoint
+
+  const response = await fetch('https://notehive-auth-server.vercel.app/api/auth/verify-token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ token }),
+  });
+
+  if (!response.ok) {
+    return {
+      redirect: {
+        destination: '/register',
+        permanent: false,
+      },
+    };
+  }
+
+  // Optionally, pass user data to the page
+  const data = await response.json();
 
   return {
-    props: {}, // Pass any necessary props to the page component
+    props: { user: data.user }, // Adjust based on your response structure
   };
 };
