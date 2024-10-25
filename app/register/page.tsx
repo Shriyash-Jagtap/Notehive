@@ -8,7 +8,7 @@ import Image from 'next/image';
 export default function Register() {
   const handleGoogleSignIn = () => {
     // Redirect to the Vercel auth server's Google sign-in endpoint
-    window.location.href = "https://notehive-auth-server.vercel.app/api/auth/signin/google?callbackUrl=https://notehive.pages.dev/callback";
+    window.location.href = `https://notehive-auth-server.vercel.app/api/auth/signin/google?callbackUrl=${encodeURIComponent('https://notehive.pages.dev/callback')}`;
   };
 
   return (
