@@ -1,14 +1,13 @@
-// ./app/lib/auth.ts
+// ./lib/auth.ts
 
-import { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+export const signIn = async () => {
+  window.location.href = "https://notehive-auth-server.vercel.app/api/auth/signin/google"; // Redirect to Google sign-in
+};
 
-export const authOptions: NextAuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",  // Ensure these env variables are set
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
-  ],
-  // Add other NextAuth options as needed, such as callbacks, session, etc.
+export const signOut = async () => {
+  await fetch("https://notehive-auth-server.vercel.app/api/auth/signout", {
+    method: "POST",
+    credentials: "include", // Include cookies if needed
+  });
+  window.location.href = "/"; // Redirect to homepage after sign-out
 };
